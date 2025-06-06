@@ -39,7 +39,7 @@ yarn install
 ```env
 NODE_ENV=development
 PORT=3000
-DATABASE=mongodb://localhost/task-manager
+DATABASE=mongodb://db/task-manager
 JWT_SECRET=your-secret-key
 JWT_EXPIRES_IN=90d
 ```
