@@ -132,6 +132,17 @@ NODE_ENV=production yarn start
 - Description: Required
 - Status: Required, must be one of: "pending", "in-progress", "done"
 
+## API Testing
+
+### Postman Collection
+- Import the `task-manager-api.postman_collection.json` file into Postman
+
+### API Endpoints
+- GET /api/tasks - Get all tasks
+- POST /api/tasks - Create new task
+- PUT /api/tasks/:id - Update task
+- DELETE /api/tasks/:id - Delete task
+
 ## Error Handling
 
 The API uses a global error handling middleware that returns errors in the following format:
@@ -184,7 +195,3 @@ docker-compose up
 ```
 
 This will start both the MongoDB and Node.js containers.
-
-## License
-
-This project is licensed under the MIT License.
