@@ -75,7 +75,7 @@ class TaskController {
                 },
             );
 
-            if (!foundTask) return next(new AppError("Task not found", 404));
+            if (!foundTask) throw new AppError("Task not found", 404);
 
             res.status(200).json({
                 data: foundTask,
@@ -99,7 +99,7 @@ class TaskController {
                 user: userId,
             });
 
-            if (!foundTask) return next(new AppError("Task not found", 404));
+            if (!foundTask) throw new AppError("Task not found", 404);
 
             res.status(204).json({
                 data: null,
@@ -119,7 +119,7 @@ class TaskController {
 
             const foundTask = await Task.findOne({ _id: id, user: userId });
 
-            if (!foundTask) return next(new AppError("Task not found", 404));
+            if (!foundTask) throw new AppError("Task not found", 404);
 
             res.status(200).json({
                 data: foundTask,

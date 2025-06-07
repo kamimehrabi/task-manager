@@ -47,9 +47,7 @@ class AuthController {
             const { email, password } = req.body;
 
             if (!email || !password) {
-                return next(
-                    new AppError("Please provide email and password", 400),
-                );
+                throw new AppError("Please provide email and password", 400);
             }
 
             const foundUser = await User.findOne({ email }).select("+password");
@@ -58,7 +56,7 @@ class AuthController {
                 !foundUser ||
                 !(await foundUser.correctPassword(password, foundUser.password))
             ) {
-                return next(new AppError("Incorrect email or password", 401));
+                throw new AppError("Incorrect email or password", 401);
             }
 
             const token = this.signToken(foundUser._id);
@@ -93,18 +91,16 @@ class AuthController {
             const decoded = await verifyJWT(token, this.secret);
 
             if (typeof decoded === "string") {
-                return next(new AppError("Invalid token format.", 401));
+                throw new AppError("Invalid token format.", 401);
             }
 
             const currentUser = await User.findById(
                 (decoded as jwt.JwtPayload).id,
             );
             if (!currentUser) {
-                return next(
-                    new AppError(
-                        "The user belonging to this token does not exist.",
-                        401,
-                    ),
+                throw new AppError(
+                    "The user belonging to this token does not exist.",
+                    401,
                 );
             }
 
